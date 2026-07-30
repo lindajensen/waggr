@@ -2,6 +2,8 @@ CREATE TABLE walks (
   id SERIAL PRIMARY KEY,
   duration INTEGER NOT NULL,
   notes TEXT,
+  potty_breaks TEXT[],
+  quick_notes TEXT[],
   created_at TIMESTAMP DEFAULT NOW()
 );
 
