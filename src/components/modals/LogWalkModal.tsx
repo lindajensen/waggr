@@ -10,6 +10,7 @@ interface LogWalkModalProps {
 
 export default function LogWalkModal({ onClose }: LogWalkModalProps) {
   const [selectedDuration, setSelectedDuration] = useState<string | null>(null);
+  const [customDuration, setCustomDuration] = useState<string>("");
   const [pottyBreaks, setPottyBreaks] = useState<string[]>([]);
   const [notes, setNotes] = useState<string>("");
   const [selectedQuickNotes, setSelectedQuickNotes] = useState<string[]>([]);
@@ -46,9 +47,12 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
     setError(null);
 
     try {
+      const finalDuration =
+        selectedDuration === "other" ? customDuration : selectedDuration;
+
       const formData = new FormData();
 
-      formData.append("duration", selectedDuration ?? "");
+      formData.append("duration", finalDuration ?? "");
       formData.append("notes", notes ?? "");
       formData.append("pottyBreaks", JSON.stringify(pottyBreaks));
       formData.append("quickNotes", JSON.stringify(selectedQuickNotes));
@@ -93,10 +97,14 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
               <button
                 key={duration}
                 type="button"
-                onClick={() => setSelectedDuration(duration)}
+                onClick={() =>
+                  setSelectedDuration(
+                    selectedDuration === duration ? null : duration,
+                  )
+                }
                 className={
                   selectedDuration === duration
-                    ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                    ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
                     : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
@@ -106,10 +114,14 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
 
             <button
               type="button"
-              onClick={() => setSelectedDuration("other")}
+              onClick={() =>
+                setSelectedDuration(
+                  selectedDuration === "other" ? null : "other",
+                )
+              }
               className={
                 selectedDuration === "other"
-                  ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                  ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
                   : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
               }
             >
@@ -121,7 +133,9 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
             <input
               type="number"
               placeholder="Enter minutes"
-              className="mt-2 w-full rounded-2xl border border-[#e5ddd3] bg-[#fff9f3] px-4 py-1.5 text-sm text-[#1c1917] placeholder:text-[#6b6560] focus:outline-none focus:border-[#5c5553]"
+              value={customDuration}
+              onChange={(e) => setCustomDuration(e.target.value)}
+              className="mt-2 w-full rounded-2xl border border-[#e5ddd3] bg-[#fff9f3] px-4 py-1.5 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
             />
           )}
         </fieldset>
@@ -167,7 +181,7 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
             rows={3}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="bg-[#fff9f3] border border-[#e5ddd3] w-full rounded-2xl mt-2 px-4 py-2 text-sm text-[#1c1917] placeholder:text-[#6b6560] focus:outline-none focus:border-[#5c5553]"
+            className="bg-[#fff9f3] border border-[#e5ddd3] w-full rounded-2xl mt-2 px-4 py-2 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
           ></textarea>
         </div>
 
@@ -203,12 +217,16 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
         <button
           className="bg-[#5c5552] text-white hover:bg-[#4A4441] shadow-[#5C5552]/20 px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
-          disabled={!selectedDuration}
+          disabled={
+            !selectedDuration ||
+            (selectedDuration === "other" && !customDuration)
+          }
         >
           Save Walk
         </button>
 
-        {!selectedDuration && (
+        {(!selectedDuration ||
+          (selectedDuration === "other" && !customDuration)) && (
           <p className="text-xs text-muted text-center mt-2">
             Select a duration to save this walk
           </p>
