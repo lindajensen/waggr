@@ -21,7 +21,28 @@ export async function addWalk(formData: FormData) {
   const parsedQuickNotes = JSON.parse(quickNotesRaw);
 
   await sql`
-    INSERT INTO walks (duration, notes, Potty_breaks, quick_notes)
+    INSERT INTO walks (duration, notes, potty_breaks, quick_notes)
     VALUES (${Number(duration)}, ${notes}, ${parsedPottyBreaks}, ${parsedQuickNotes})
+  `;
+}
+
+export async function addFeeding(formData: FormData) {
+  const portionSize = formData.get("portionSize");
+  const foodType = formData.get("foodType");
+  const appetite = formData.get("appetite");
+  const notes = formData.get("notes");
+
+  if (
+    typeof portionSize !== "string" ||
+    typeof foodType !== "string" ||
+    typeof appetite !== "string" ||
+    typeof notes !== "string"
+  ) {
+    throw new Error("Invalid form data");
+  }
+
+  await sql`
+    INSERT INTO feedings (portion_size, food_type, appetite, notes)
+    VALUES (${Number(portionSize)}, ${foodType}, ${appetite}, ${notes})
   `;
 }
