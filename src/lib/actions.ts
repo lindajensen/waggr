@@ -1,6 +1,7 @@
 "use server";
 
 import sql from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 export async function addWalk(formData: FormData) {
   const duration = formData.get("duration");
@@ -24,6 +25,8 @@ export async function addWalk(formData: FormData) {
     INSERT INTO walks (duration, notes, potty_breaks, quick_notes)
     VALUES (${Number(duration)}, ${notes}, ${parsedPottyBreaks}, ${parsedQuickNotes})
   `;
+
+  revalidatePath("/");
 }
 
 export async function addFeeding(formData: FormData) {
@@ -45,4 +48,6 @@ export async function addFeeding(formData: FormData) {
     INSERT INTO feedings (portion_size, food_type, appetite, notes)
     VALUES (${Number(portionSize)}, ${foodType}, ${appetite}, ${notes})
   `;
+
+  revalidatePath("/");
 }
