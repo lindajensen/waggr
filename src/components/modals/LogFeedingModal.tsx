@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { addFeeding } from "@/lib/actions";
 import { Bone, X, AlertCircle } from "lucide-react";
 
 interface LogFeedingModalProps {
@@ -31,8 +32,33 @@ export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
 
   const appetiteOptions = ["Ate all", "Ate most", "Ate little", "Didn't eat"];
 
-  //TODO: Committa
-  //TODO: handleSubmit
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      const finalPortionSize =
+        selectedPortionSize === "other"
+          ? customPortionSize
+          : selectedPortionSize;
+
+      const finalFoodType =
+        selectedFoodType === "other" ? customFoodType : selectedFoodType;
+      const formData = new FormData();
+
+      formData.append("portionSize", finalPortionSize ?? "");
+      formData.append("foodType", finalFoodType ?? "");
+      formData.append("appetite", selectedAppetite ?? "");
+      formData.append("notes", notes);
+
+      await addFeeding(formData);
+
+      onClose();
+    } catch (error) {
+      console.error(error);
+      setError("Something went wrong. Please try again");
+    }
+  }
 
   return (
     <section>
@@ -57,7 +83,7 @@ export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
 
       <div className="divider"></div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <fieldset className="mb-4">
           <legend className="field-label">Portion Size</legend>
           <div className="flex flex-wrap gap-2">
@@ -76,7 +102,7 @@ export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
                     : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
-                {portionSize}g
+                {portionSize} g
               </button>
             ))}
 
@@ -118,11 +144,11 @@ export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
                 type="button"
                 onClick={() =>
                   setSelectedFoodType(
-                    selectedFoodType === "other" ? null : "other",
+                    selectedFoodType === foodType ? null : foodType,
                   )
                 }
                 className={
-                  selectedFoodType === "other"
+                  selectedFoodType === foodType
                     ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
                     : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
                 }
@@ -133,7 +159,11 @@ export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
 
             <button
               type="button"
-              onClick={() => setSelectedFoodType("other")}
+              onClick={() =>
+                setSelectedFoodType(
+                  selectedFoodType === "other" ? null : "other",
+                )
+              }
               className={
                 selectedFoodType === "other"
                   ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
