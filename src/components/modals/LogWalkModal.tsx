@@ -108,7 +108,7 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
                     : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
-                {duration}m
+                {duration} min
               </button>
             ))}
 
