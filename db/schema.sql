@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS walks;
+DROP TABLE IF EXISTS feedings;
+
 CREATE TABLE walks (
   id SERIAL PRIMARY KEY,
   duration INTEGER NOT NULL,
@@ -9,7 +12,9 @@ CREATE TABLE walks (
 
 CREATE TABLE feedings (
   id SERIAL PRIMARY KEY,
-  amount TEXT NOT NULL,
-  fed_at TIMESTAMP DEFAULT NOW(),
-  notes TEXT
+  portion_size INTEGER NOT NULL,
+  food_type TEXT NOT NULL,
+  appetite TEXT,
+  notes TEXT,
+  fed_at TIMESTAMP DEFAULT NOW()
 );
