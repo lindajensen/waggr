@@ -6,9 +6,13 @@ import { X, Check, TreeDeciduous, AlertCircle } from "lucide-react";
 
 interface LogWalkModalProps {
   onClose: () => void;
+  onSuccess: (title: string, subtitle?: string) => void;
 }
 
-export default function LogWalkModal({ onClose }: LogWalkModalProps) {
+export default function LogWalkModal({
+  onClose,
+  onSuccess,
+}: LogWalkModalProps) {
   const [selectedDuration, setSelectedDuration] = useState<string | null>(null);
   const [customDuration, setCustomDuration] = useState<string>("");
   const [pottyBreaks, setPottyBreaks] = useState<string[]>([]);
@@ -59,7 +63,10 @@ export default function LogWalkModal({ onClose }: LogWalkModalProps) {
 
       await addWalk(formData);
 
-      onClose();
+      const subtitle = `${finalDuration} min`;
+
+      onSuccess("Walk logged", subtitle);
+
     } catch (error) {
       console.error(error);
       setError("Something went wrong. Please try again");
