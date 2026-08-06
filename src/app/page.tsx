@@ -1,11 +1,13 @@
 import sql from "@/lib/db";
 
-export default async function Home() {
-  const walks = await sql`SELECT * FROM walks`;
+import QuickActions from "@/components/QuickActions";
 
+export default async function Home() {
   return (
-    <div>
-      <h1>Walks: {walks.length}</h1>
-    </div>
+    <main>
+      <section></section>
+
+      <QuickActions />
+    </main>
   );
 }
