@@ -5,9 +5,20 @@ import { Plus } from "lucide-react";
 import Modal from "@/components/modals/Modal";
 import LogWalkModal from "@/components/modals/LogWalkModal";
 import LogFeedingModal from "@/components/modals/LogFeedingModal";
+import Toast from "./Toast";
 
 export default function QuickActions() {
   const [openModal, setOpenModal] = useState<"walk" | "feeding" | null>(null);
+
+  const [toast, setToast] = useState<{
+    title: string;
+    subtitle?: string;
+  } | null>(null);
+
+  function handleLogSuccess(title: string, subtitle?: string) {
+    setToast({ title, subtitle });
+    setOpenModal(null);
+  }
 
   return (
     <>
@@ -34,14 +45,28 @@ export default function QuickActions() {
 
       {openModal === "walk" && (
         <Modal isOpen={true} onClose={() => setOpenModal(null)}>
-          <LogWalkModal onClose={() => setOpenModal(null)} />
+          <LogWalkModal
+            onClose={() => setOpenModal(null)}
+            onSuccess={handleLogSuccess}
+          />
         </Modal>
       )}
 
       {openModal === "feeding" && (
         <Modal isOpen={true} onClose={() => setOpenModal(null)}>
-          <LogFeedingModal onClose={() => setOpenModal(null)} />
+          <LogFeedingModal
+            onClose={() => setOpenModal(null)}
+            onSuccess={handleLogSuccess}
+          />
         </Modal>
+      )}
+
+      {toast && (
+        <Toast
+          title={toast.title}
+          subtitle={toast.subtitle}
+          onDismiss={() => setToast(null)}
+        />
       )}
     </>
   );
