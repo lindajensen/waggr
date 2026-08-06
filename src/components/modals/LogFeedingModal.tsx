@@ -6,9 +6,13 @@ import { Bone, X, AlertCircle } from "lucide-react";
 
 interface LogFeedingModalProps {
   onClose: () => void;
+  onSuccess: (title: string, subtitle?: string) => void;
 }
 
-export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
+export default function LogFeedingModal({
+  onClose,
+  onSuccess,
+}: LogFeedingModalProps) {
   const [selectedPortionSize, setSelectedPortionSize] = useState<string | null>(
     null,
   );
@@ -53,7 +57,9 @@ export default function LogFeedingModal({ onClose }: LogFeedingModalProps) {
 
       await addFeeding(formData);
 
-      onClose();
+      const subtitle = `${finalPortionSize} g · ${finalFoodType}`;
+
+      onSuccess("Feeding logged", subtitle);
     } catch (error) {
       console.error(error);
       setError("Something went wrong. Please try again");
