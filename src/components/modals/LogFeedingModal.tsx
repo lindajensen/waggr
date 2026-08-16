@@ -25,6 +25,7 @@ export default function LogFeedingModal({
   const [error, setError] = useState<string | null>(null);
 
   const portionSizes = ["25", "50", "75", "100", "150", "200"];
+
   const foodTypes = [
     "Dry kibble",
     "Wet food",
@@ -48,6 +49,7 @@ export default function LogFeedingModal({
 
       const finalFoodType =
         selectedFoodType === "other" ? customFoodType : selectedFoodType;
+
       const formData = new FormData();
 
       formData.append("portionSize", finalPortionSize ?? "");
@@ -70,21 +72,26 @@ export default function LogFeedingModal({
     <section>
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-[#d4e1d4] flex items-center justify-center">
-            <Bone size={20} className="text-[#4a5d4a]" />
+          <div className="w-10 h-10 rounded-full bg-blush flex items-center justify-center">
+            <Bone size={20} className="text-foreground" />
           </div>
+
           <div>
             <h1 className="text-xl font-medium" id="modal-title">
               Log Feeding
             </h1>
-            <p className="text-subtitle">Record meal portions & food details</p>
+            <p className="text-subtitle">Record food details</p>
           </div>
         </div>
 
-        <div>
-          {" "}
-          <X size={20} className="text-muted" onClick={onClose} />
-        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="text-muted cursor-pointer"
+          aria-label="Close"
+        >
+          <X size={20} />
+        </button>
       </header>
 
       <div className="divider"></div>
@@ -92,6 +99,7 @@ export default function LogFeedingModal({
       <form onSubmit={handleSubmit}>
         <fieldset className="mb-4">
           <legend className="field-label">Portion Size</legend>
+
           <div className="flex flex-wrap gap-2">
             {portionSizes.map((portionSize) => (
               <button
@@ -104,8 +112,8 @@ export default function LogFeedingModal({
                 }
                 className={
                   selectedPortionSize === portionSize
-                    ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
-                    : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                    ? "bg-blush text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                    : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
                 {portionSize} g
@@ -121,8 +129,8 @@ export default function LogFeedingModal({
               }
               className={
                 selectedPortionSize === "other"
-                  ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
-                  : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                  ? "bg-blush text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                  : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
               }
             >
               Other
@@ -135,7 +143,7 @@ export default function LogFeedingModal({
               placeholder="Enter grams"
               value={customPortionSize}
               onChange={(e) => setCustomPortionSize(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-[#e5ddd3] bg-[#fff9f3] px-4 py-1.5 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
+              className="mt-2 w-full rounded-2xl border border-sand bg-background px-4 py-1.5 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-blush"
             />
           )}
         </fieldset>
@@ -155,8 +163,8 @@ export default function LogFeedingModal({
                 }
                 className={
                   selectedFoodType === foodType
-                    ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
-                    : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                    ? "bg-blush text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                    : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
                 {foodType}
@@ -172,8 +180,8 @@ export default function LogFeedingModal({
               }
               className={
                 selectedFoodType === "other"
-                  ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
-                  : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                  ? "bg-blush text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                  : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
               }
             >
               Other
@@ -186,13 +194,14 @@ export default function LogFeedingModal({
               placeholder="Enter food type"
               value={customFoodType}
               onChange={(e) => setCustomFoodType(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-[#e5ddd3] bg-[#fff9f3] px-4 py-1.5 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
+              className="mt-2 w-full rounded-2xl border border-sand bg-background px-4 py-1.5 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-blush"
             />
           )}
         </fieldset>
 
         <fieldset className="mb-4">
           <legend className="field-label">Appetite</legend>
+
           <div className="flex flex-wrap gap-2">
             {appetiteOptions.map((appetiteOption) => (
               <button
@@ -205,8 +214,8 @@ export default function LogFeedingModal({
                 }
                 className={
                   selectedAppetite === appetiteOption
-                    ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
-                    : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                    ? "bg-blush text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                    : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
                 {appetiteOption}
@@ -219,25 +228,28 @@ export default function LogFeedingModal({
           <label htmlFor="notes" className="field-label">
             Notes (optional)
           </label>
+
           <textarea
             name="notes"
             id="notes"
             value={notes}
             placeholder="e.g. Drank lots of water, ate slowly"
             onChange={(e) => setNotes(e.target.value)}
-            className="bg-[#fff9f3] border border-[#e5ddd3] w-full rounded-2xl mt-2 px-4 py-2 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
-          ></textarea>
+            className="bg-surface border border-sand w-full rounded-2xl mt-2 px-4 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-blush"
+          />
         </div>
 
+        {/* Error */}
         {error && (
-          <div className="flex items-start gap-2 bg-[#f9e4e0] border border-[#f0c9c2] text-[#b3564a] rounded-2xl px-4 py-3 text-sm mb-4">
+          <div className="flex items-start gap-2 bg-blush border border-blush-hover text-foreground rounded-2xl px-4 py-3 text-sm mb-4">
             <AlertCircle size={18} className="shrink-0 mt-0.5" />
             <span>{error}</span>
           </div>
         )}
 
+        {/* Submit */}
         <button
-          className="bg-[#5c5552] text-white hover:bg-[#4A4441] shadow-[#5C5552]/20 px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-blush text-foreground hover:bg-blush-hover px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
           disabled={
             !selectedPortionSize ||

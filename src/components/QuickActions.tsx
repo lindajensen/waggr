@@ -24,7 +24,7 @@ export default function QuickActions() {
     <>
       <section className="flex flex-col gap-3 mt-4">
         <button
-          className="bg-[#5c5552] text-white hover:bg-[#4A4441] shadow-[#5C5552]/20 px-4 h-15 rounded-3xl font-bold cursor-pointer"
+          className="bg-sage hover:bg-sage-hover px-4 h-15 rounded-3xl font-bold cursor-pointer"
           onClick={() => setOpenModal("walk")}
         >
           <div className="flex items-center justify-center gap-1">
@@ -32,8 +32,9 @@ export default function QuickActions() {
             Log Walk
           </div>
         </button>
+
         <button
-          className="bg-[#d4e1d4] text-[#4a5d4a] hover:bg-[#C2D3C2] px-4 h-15 rounded-3xl font-bold cursor-pointer"
+          className="bg-blush hover:bg-blush-hover px-4 h-15 rounded-3xl font-bold cursor-pointer"
           onClick={() => setOpenModal("feeding")}
         >
           <div className="flex items-center justify-center gap-1">

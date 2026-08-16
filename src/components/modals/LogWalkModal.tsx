@@ -66,7 +66,6 @@ export default function LogWalkModal({
       const subtitle = `${finalDuration} min`;
 
       onSuccess("Walk logged", subtitle);
-
     } catch (error) {
       console.error(error);
       setError("Something went wrong. Please try again");
@@ -77,9 +76,10 @@ export default function LogWalkModal({
     <section>
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-[#d4e1d4] flex items-center justify-center">
-            <TreeDeciduous size={20} className="text-[#4a5d4a]" />
+          <div className="w-10 h-10 rounded-full bg-sage flex items-center justify-center">
+            <TreeDeciduous size={20} className="text-foreground" />
           </div>
+
           <div>
             <h1 className="text-xl font-medium" id="modal-title">
               Log Walk
@@ -88,10 +88,14 @@ export default function LogWalkModal({
           </div>
         </div>
 
-        <div>
-          {" "}
-          <X size={20} className="text-muted" onClick={onClose} />
-        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="text-muted cursor-pointer"
+          aria-label="Close"
+        >
+          <X size={20} />
+        </button>
       </header>
 
       <div className="divider"></div>
@@ -99,6 +103,7 @@ export default function LogWalkModal({
       <form onSubmit={handleSubmit}>
         <fieldset className="mb-4">
           <legend className="field-label">Duration (minutes)</legend>
+
           <div className="flex flex-wrap gap-2">
             {durations.map((duration) => (
               <button
@@ -111,8 +116,8 @@ export default function LogWalkModal({
                 }
                 className={
                   selectedDuration === duration
-                    ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
-                    : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                    ? "bg-sage text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                    : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
                 {duration} min
@@ -128,8 +133,8 @@ export default function LogWalkModal({
               }
               className={
                 selectedDuration === "other"
-                  ? "bg-[#5c5553] text-white text-sm rounded-full px-3 py-1.5 font-medium shadow-sm border border-transparent"
-                  : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-full px-3 py-1.5 font-medium"
+                  ? "bg-sage text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                  : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
               }
             >
               Other
@@ -142,21 +147,22 @@ export default function LogWalkModal({
               placeholder="Enter minutes"
               value={customDuration}
               onChange={(e) => setCustomDuration(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-[#e5ddd3] bg-[#fff9f3] px-4 py-1.5 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
+              className="mt-2 w-full rounded-2xl border border-sand bg-background px-4 py-1.5 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-sage"
             />
           )}
         </fieldset>
 
         <fieldset className="mb-4">
           <legend className="field-label">Potty Break</legend>
+
           <div className="flex gap-2">
             <button
               type="button"
               onClick={() => toggleArrayValue("pee", setPottyBreaks)}
               className={
                 pottyBreaks.includes("pee")
-                  ? "bg-[#5c5553] text-white text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
-                  : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-2xl px-3 py-3 font-medium flex-1 flex items-center justify-center gap-2"
+                  ? "bg-sage text-foreground text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
+                  : "bg-surface border border-sand text-muted text-sm rounded-2xl px-3 py-3 font-medium flex-1 flex items-center justify-center gap-2"
               }
             >
               <span>Pee</span>
@@ -168,8 +174,8 @@ export default function LogWalkModal({
               onClick={() => toggleArrayValue("poop", setPottyBreaks)}
               className={
                 pottyBreaks.includes("poop")
-                  ? "bg-[#5c5553] text-white text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
-                  : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-2xl px-3 py-3 font-medium flex-1 flex items-center justify-center gap-2"
+                  ? "bg-sage text-foreground text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
+                  : "bg-surface border border-sand text-muted text-sm rounded-2xl px-3 py-3 font-medium flex-1 flex items-center justify-center gap-2"
               }
             >
               <span>Poop</span>
@@ -182,18 +188,20 @@ export default function LogWalkModal({
           <label htmlFor="notes" className="field-label">
             Notes (optional)
           </label>
+
           <textarea
             name="notes"
             id="notes"
             rows={3}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="bg-[#fff9f3] border border-[#e5ddd3] w-full rounded-2xl mt-2 px-4 py-2 text-sm text-[#1c1917] placeholder:text-[#a39d96] focus:outline-none focus:border-[#5c5553]"
-          ></textarea>
+            className="bg-surface border border-sand w-full rounded-2xl mt-2 px-4 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-sage"
+          />
         </div>
 
         <fieldset className="mb-4">
           <legend className="field-label">Quick Notes</legend>
+
           <div className="flex flex-wrap gap-2">
             {quickNoteOptions.map((quickNote) => (
               <button
@@ -204,8 +212,8 @@ export default function LogWalkModal({
                 }
                 className={
                   selectedQuickNotes.includes(quickNote)
-                    ? "bg-[#d4e1d4] text-[#4a5d4a] text-sm rounded-2xl px-3 py-1.5 font-medium shadow-sm flex items-center justify-center gap-2"
-                    : "bg-[#fff9f3] border border-[#e5ddd3] text-[#6b6560] text-sm rounded-2xl px-3 py-1.5 font-medium flex items-center justify-center gap-2"
+                    ? "bg-sage text-foreground text-sm rounded-2xl px-3 py-1.5 font-medium shadow-sm flex items-center justify-center gap-2"
+                    : "bg-surface border border-sand text-muted text-sm rounded-2xl px-3 py-1.5 font-medium flex items-center justify-center gap-2"
                 }
               >
                 {quickNote}
@@ -215,14 +223,14 @@ export default function LogWalkModal({
         </fieldset>
 
         {error && (
-          <div className="flex items-start gap-2 bg-[#f9e4e0] border border-[#f0c9c2] text-[#b3564a] rounded-2xl px-4 py-3 text-sm mb-4">
+          <div className="flex items-start gap-2 bg-blush border border-blush-hover text-foreground rounded-2xl px-4 py-3 text-sm mb-4">
             <AlertCircle size={18} className="shrink-0 mt-0.5" />
             <span>{error}</span>
           </div>
         )}
 
         <button
-          className="bg-[#5c5552] text-white hover:bg-[#4A4441] shadow-[#5C5552]/20 px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-sage text-foreground hover:bg-sage-hover px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
           disabled={
             !selectedDuration ||
