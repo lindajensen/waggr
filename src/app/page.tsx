@@ -2,6 +2,7 @@ import sql from "@/lib/db";
 import { TreeDeciduous, Bone } from "lucide-react";
 
 import StatusCard from "@/components/StatusCard";
+import EmptyStatusCard from "@/components/EmptyStatusCard";
 import QuickActions from "@/components/QuickActions";
 
 import { capitalize } from "@/lib/formatters";
@@ -33,7 +34,12 @@ export default async function Home() {
           detail={`${lastWalk.duration} min · ${lastWalk.potty_breaks?.map(capitalize).join(" & ")}`}
         />
       ) : (
-        <p>No walks logged yet</p>
+        <EmptyStatusCard
+          icon={TreeDeciduous}
+          title="Last Walk"
+          message="No walks logged yet"
+          hint="Ready for your first stroll together?"
+        />
       )}
 
       {lastFeeding ? (
@@ -44,7 +50,12 @@ export default async function Home() {
           detail={`${lastFeeding.portion_size} g · ${lastFeeding.food_type}`}
         />
       ) : (
-        <p>No feedings logged yet</p>
+        <EmptyStatusCard
+          icon={Bone}
+          title="Last Feeding"
+          message="No meals logged yet"
+          hint="Time to log the first bowl or treat?"
+        />
       )}
 
       <QuickActions />
