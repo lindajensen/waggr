@@ -22,7 +22,7 @@ export default function QuickActions() {
 
   return (
     <>
-      <section className="flex flex-col gap-3">
+      <section className="flex flex-col gap-3 mt-4">
         <button
           className="bg-[#5c5552] text-white hover:bg-[#4A4441] shadow-[#5C5552]/20 px-4 h-15 rounded-3xl font-bold cursor-pointer"
           onClick={() => setOpenModal("walk")}
