@@ -7,7 +7,7 @@ CREATE TABLE walks (
   notes TEXT,
   potty_breaks TEXT[],
   quick_notes TEXT[],
-  created_at TIMESTAMP DEFAULT NOW()
+  created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 CREATE TABLE feedings (
@@ -16,5 +16,5 @@ CREATE TABLE feedings (
   food_type TEXT NOT NULL,
   appetite TEXT,
   notes TEXT,
-  fed_at TIMESTAMP DEFAULT NOW()
+  fed_at TIMESTAMPTZ DEFAULT NOW()
 );
