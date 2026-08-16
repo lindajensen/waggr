@@ -1,24 +1,51 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff9f3;
-  --foreground: #1c1917;
-  --muted: #6b6560;
+  --background: #faf8f5;
+  --foreground: #2e332d;
+  --muted: #a1a1a1;
+  --surface: #ffffff;
+  --blue-gray: #d6dde5;
+  --blue-gray-hover: #3d4b5c;
+  --blush: #e8d4d5;
+  --blush-hover: #dcc3c5;
+  --sage: #d1d9cf;
+  --sage-hover: #c1cbc0;
+  --sand: #e5d3c0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+  --color-surface: var(--surface);
+
+  --color-blue-gray: var(--blue-gray);
+  --color-blue-gray-hover: var(--blue-gray-hover);
+  --color-blush: var(--blush);
+  --color-blush-hover: var(--blush-hover);
+  --color-sage: var(--sage);
+  --color-sage-hover: var(--sage-hover);
+  --color-sand: var(--sand);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #a8a29e;
+    --background: #1a1c19;
+    --foreground: #ece9e2;
+    --muted: #8e918c;
+    --surface: #242723;
+
+    --blue-gray: #313e4e;
+    --blue-gray-hover: #3d4b5c;
+
+    --blush: #422f32;
+    --blush-hover: #513b3f;
+
+    --sage: #303c2f;
+    --sage-hover: #3b4939;
+
+    --sand: #403529;
   }
 }
 
