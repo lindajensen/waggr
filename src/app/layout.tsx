@@ -2,15 +2,17 @@ import type { Metadata } from "next";
 import { Fredoka, Inter } from "next/font/google";
 import "./globals.css";
 
+import Navbar from "@/components/Navbar";
+
 const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
-  variable: "--font-heading",
+  variable: "--font-fredoka",
 });
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +30,10 @@ export default function RootLayout({
       lang="en"
       className={`${fredoka.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col px-4 py-6">{children}</body>
+      <body className="min-h-full flex flex-col px-4 py-6">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
