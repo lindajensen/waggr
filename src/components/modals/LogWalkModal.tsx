@@ -76,7 +76,7 @@ export default function LogWalkModal({
     <section>
       <header className="flex items-start justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-sage flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-sand flex items-center justify-center">
             <TreeDeciduous size={20} className="text-foreground" />
           </div>
 
@@ -116,7 +116,7 @@ export default function LogWalkModal({
                 }
                 className={
                   selectedDuration === duration
-                    ? "bg-sage text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                    ? "bg-sand text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
                     : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
                 }
               >
@@ -133,7 +133,7 @@ export default function LogWalkModal({
               }
               className={
                 selectedDuration === "other"
-                  ? "bg-sage text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
+                  ? "bg-sand text-foreground text-sm rounded-full px-3 py-1.5 font-medium shadow-sm"
                   : "bg-surface border border-sand text-muted text-sm rounded-full px-3 py-1.5 font-medium"
               }
             >
@@ -147,7 +147,7 @@ export default function LogWalkModal({
               placeholder="Enter minutes"
               value={customDuration}
               onChange={(e) => setCustomDuration(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-sand bg-background px-4 py-1.5 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-sage"
+              className="mt-2 w-full rounded-2xl border border-sand bg-background px-4 py-1.5 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-sand"
             />
           )}
         </fieldset>
@@ -161,7 +161,7 @@ export default function LogWalkModal({
               onClick={() => toggleArrayValue("pee", setPottyBreaks)}
               className={
                 pottyBreaks.includes("pee")
-                  ? "bg-sage text-foreground text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
+                  ? "bg-sand text-foreground text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
                   : "bg-surface border border-sand text-muted text-sm rounded-2xl px-3 py-3 font-medium flex-1 flex items-center justify-center gap-2"
               }
             >
@@ -174,7 +174,7 @@ export default function LogWalkModal({
               onClick={() => toggleArrayValue("poop", setPottyBreaks)}
               className={
                 pottyBreaks.includes("poop")
-                  ? "bg-sage text-foreground text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
+                  ? "bg-sand text-foreground text-sm rounded-2xl px-3 py-3 font-medium shadow-sm flex-1 flex items-center justify-center gap-2"
                   : "bg-surface border border-sand text-muted text-sm rounded-2xl px-3 py-3 font-medium flex-1 flex items-center justify-center gap-2"
               }
             >
@@ -195,7 +195,7 @@ export default function LogWalkModal({
             rows={3}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="bg-surface border border-sand w-full rounded-2xl mt-2 px-4 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-sage"
+            className="bg-surface border border-sand w-full rounded-2xl mt-2 px-4 py-2 text-sm text-foreground placeholder:text-muted focus:outline-none focus:border-sand"
           />
         </div>
 
@@ -212,7 +212,7 @@ export default function LogWalkModal({
                 }
                 className={
                   selectedQuickNotes.includes(quickNote)
-                    ? "bg-sage text-foreground text-sm rounded-2xl px-3 py-1.5 font-medium shadow-sm flex items-center justify-center gap-2"
+                    ? "bg-sand text-foreground text-sm rounded-2xl px-3 py-1.5 font-medium shadow-sm flex items-center justify-center gap-2"
                     : "bg-surface border border-sand text-muted text-sm rounded-2xl px-3 py-1.5 font-medium flex items-center justify-center gap-2"
                 }
               >
@@ -230,7 +230,7 @@ export default function LogWalkModal({
         )}
 
         <button
-          className="bg-sage text-foreground hover:bg-sage-hover px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-sand text-foreground hover:bg-sand-hover px-4 h-15 w-full rounded-3xl font-bold cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
           disabled={
             !selectedDuration ||
