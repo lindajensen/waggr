@@ -24,7 +24,7 @@ export default function QuickActions() {
     <>
       <section className="flex flex-col gap-3 mt-4">
         <button
-          className="bg-sage hover:bg-sage-hover px-4 h-15 rounded-3xl font-bold cursor-pointer"
+          className="bg-sand hover:bg-blue-gray-hover px-4 h-15 rounded-3xl font-bold cursor-pointer"
           onClick={() => setOpenModal("walk")}
         >
           <div className="flex items-center justify-center gap-1">
