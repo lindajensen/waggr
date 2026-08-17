@@ -12,6 +12,7 @@
   --sage: #d1d9cf;
   --sage-hover: #c1cbc0;
   --sand: #e5d3c0;
+  --cream: #f0ebe5;
 }
 
 @theme inline {
@@ -27,6 +28,9 @@
   --color-sage: var(--sage);
   --color-sage-hover: var(--sage-hover);
   --color-sand: var(--sand);
+  --color-cream: var(--cream);
+  --font-heading: var(--font-fredoka);
+  --font-body: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
